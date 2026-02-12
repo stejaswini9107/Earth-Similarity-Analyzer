@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Earth Similarity Analyzer</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(180deg, #c9e9ff, #8cc7ff);
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .glass {
+            width: 420px;
+            padding: 35px;
+            border-radius: 24px;
+            background: linear-gradient(
+                180deg,
+                rgba(255,255,255,0.8),
+                rgba(255,255,255,0.4)
+            );
+            backdrop-filter: blur(14px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+
+        h1 {
+            color: #0b3d91;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #245b9e;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            font-size: 15px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 25px;
+            border-radius: 20px;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            color: white;
+            background: linear-gradient(180deg, #4facfe, #00c6ff);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
+
+        .result {
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .score {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0b3d91;
+            text-align: center;
+        }
+
+        .error {
+            color: darkred;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glass">
+        <h1>🌍 Earth Similarity</h1>
+        <p class="subtitle">Compare exoplanets with Earth</p>
+
+        <input id="planet" placeholder="e.g. Kepler-452 b">
+        <br><br>
+        <button onclick="analyze()">Analyze</button>
+
+        <div id="output" class="result"></div>
+    </div>
+
+<script>
+function analyze() {
+    const planet = document.getElementById("planet").value;
+
+    fetch(`/compare?planet=${encodeURIComponent(planet)}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) {
+                document.getElementById("output").innerHTML =
+                    `<p class="error">${data.error}</p>`;
+            } else {
+                document.getElementById("output").innerHTML = `
+                    <h2>${data.planet}</h2>
+                    <p class="score">${data.similarity}% similar to Earth</p>
+
+                    <div class="row"><span>🌍 Radius</span><span>${data.radius} × Earth</span></div>
+                    <div class="row"><span>⚖️ Mass</span><span>${data.mass} × Earth</span></div>
+                    <div class="row"><span>🛰 Orbit</span><span>${data.orbit} days</span></div>
+                    <div class="row"><span>☀️ Star Temp</span><span>${data.star_temp} K</span></div>
+                `;
+            }
+        });
+}
+</script>
+</body>
+</html>
