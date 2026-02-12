@@ -33,12 +33,10 @@ Screenshots
 <img width="1918" height="963" alt="Screenshot 2026-02-11 213926" src="https://github.com/user-attachments/assets/54656ccc-e6cb-412d-aee8-d3c482cc6f42" />
 
 
-Future Improvements
-Real-time camera input for pothole detection
+## Future Improvements
+- Real-time camera input for pothole detection
+- Route optimization using traffic data
+- Mobile-friendly responsive design
 
-Route optimization using traffic data
-
-Mobile-friendly responsive design
-
-Role
+## Role
 AI & Web Developer
