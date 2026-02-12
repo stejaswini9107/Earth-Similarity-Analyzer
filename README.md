@@ -29,7 +29,7 @@ Open your browser and go to:
 http://localhost:5000
 Upload a road image and view pothole detection results along with safe route guidance.
 
-Screenshots
+## Screenshots
 <img width="1918" height="963" alt="Screenshot 2026-02-11 213926" src="https://github.com/user-attachments/assets/54656ccc-e6cb-412d-aee8-d3c482cc6f42" />
 
 
